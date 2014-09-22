@@ -48,7 +48,7 @@ for img in link:
     elif img[:3] == '"//':
         img = url.split(':')[0] + ':' + img[1:-1]
     else:
-        img = url+img[1:-1]
+        img = url + img[1:-1]
 
     print (img)
     f = urlopen(img)
