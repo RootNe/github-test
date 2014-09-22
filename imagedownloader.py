@@ -1,13 +1,15 @@
-import re
 import os
+import re
 
 try:
     from urllib2 import urlopen
 except ImportError:
     from urllib.request import urlopen
 
-urlpattern = r'\"(?:http://)?[a-zA-Z0-9\/\(\)\-\_\\\s]+\.(?:jpe?g|png|gif)\"'
-namepattern = r'(?:\/)[a-zA-Z0-9\(\)\-\_\.\\\s]+\.(?:jpe?g|png|gif)'
+urlpattern = re.compile(
+    r'\"(?:http://)?[a-zA-Z0-9\/\(\)\-\_\\\s]+\.(?:jpe?g|png|gif)\"')
+namepattern = re.compile(
+    r'(?:\/)[a-zA-Z0-9\(\)\-\_\.\\\s]+\.(?:jpe?g|png|gif)')
 keepname = False
 filenum = 0
 
@@ -30,14 +32,14 @@ if not os.path.exists(d):
 
 source = str(urlopen(url).read())
 
-link = re.findall(urlpattern, source)
+link = urlpattern.findall(source)
 
 
 print(source)
 print('\n\n\n\n')
 for img in link:
     if keepname:
-        filename = folder + re.findall(namepattern, img)[0][1:]
+        filename = folder + namepattern.findall(img)[0][1:]
     else:
         filename = folder + 'img' + str(filenum) + '.' + img[-4:-1]
 
