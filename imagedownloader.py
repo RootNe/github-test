@@ -7,14 +7,14 @@ except ImportError:
     from urllib.request import urlopen
 
 urlpattern = re.compile(
-    r'\"(?:http://)?[a-zA-Z0-9\/\(\)\-\_\\\s]+\.(?:jpe?g|png|gif)\"')
+    r'\"(?:https?://)?[a-zA-Z0-9\/\(\)\-\_\\\s]+\.(?:jpe?g|png|gif)\"')
 namepattern = re.compile(
     r'(?:\/)[a-zA-Z0-9\(\)\-\_\.\\\s]+\.(?:jpe?g|png|gif)')
 keepname = False
 filenum = 0
 
 url = raw_input('URL : ')
-if url[:7] != 'http://' and url[8:] != 'https://':
+if url[:7] != 'http://' and url[:8] != 'https://':
     url = 'http://' + url
 if url[-1] is not '/':
     url = url + '/'
@@ -43,7 +43,7 @@ for img in link:
     else:
         filename = folder + 'img' + str(filenum) + '.' + img[-4:-1]
 
-    if img[:8] == '"http://':
+    if img[:8] == '"http://' or img[:9] == '"https://':
         img = img[1:-1]
     else:
         img = url+img[1:-1]
