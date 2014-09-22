@@ -7,7 +7,7 @@ except ImportError:
     from urllib.request import urlopen
 
 urlpattern = re.compile(
-    r'\"(?:https?://)?[a-zA-Z0-9\/\(\)\-\_\.\\\s]+\.(?:jpe?g|png|gif)\"')
+    r'\"(?:(?:https?:)?//)?[a-zA-Z0-9\/\(\)\-\_\.\\\s]+\.(?:jpe?g|png|gif)\"')
 namepattern = re.compile(
     r'(?:\/)[a-zA-Z0-9\(\)\-\_\.\\\s]+\.(?:jpe?g|png|gif)')
 keepname = False
@@ -45,6 +45,8 @@ for img in link:
 
     if img[:8] == '"http://' or img[:9] == '"https://':
         img = img[1:-1]
+    elif img[:3] == '"//':
+        img = url.split(':')[0] + ':' + img[1:-1]
     else:
         img = url+img[1:-1]
 
