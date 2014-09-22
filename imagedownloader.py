@@ -7,7 +7,7 @@ except ImportError:
     from urllib.request import urlopen
 
 urlpattern = re.compile(
-    r'\"(?:https?://)?[a-zA-Z0-9\/\(\)\-\_\\\s]+\.(?:jpe?g|png|gif)\"')
+    r'\"(?:https?://)?[a-zA-Z0-9\/\(\)\-\_\.\\\s]+\.(?:jpe?g|png|gif)\"')
 namepattern = re.compile(
     r'(?:\/)[a-zA-Z0-9\(\)\-\_\.\\\s]+\.(?:jpe?g|png|gif)')
 keepname = False
